@@ -23,6 +23,9 @@ contract TokenMaster is ERC721 {
     mapping(uint256 => mapping(address => bool)) public hasBought;
     mapping(uint256 => mapping(uint256 => address)) public seatTaken;
     mapping(uint256 => uint256[]) seatsTaken;
+    mapping(uint256 => mapping(address => uint256[])) public userSeatsPerOccasion;
+    mapping(address => uint256[]) private userOccasions;
+
 
     modifier onlyOwner() {
         require(msg.sender == owner);
@@ -73,8 +76,14 @@ contract TokenMaster is ERC721 {
 
         hasBought[_id][msg.sender] = true; // <-- Update buying status
         seatTaken[_id][_seat] = msg.sender; // <-- Assign seat
-
         seatsTaken[_id].push(_seat); // <-- Update seats currently taken
+
+        // Add the occasion ID to the user's list of occasions if they haven't already bought a ticket for it
+        if (!hasBought[_id][msg.sender]) {
+            userOccasions[msg.sender].push(_id);
+        }
+
+        userSeatsPerOccasion[_id][msg.sender].push(_seat);
 
         totalSupply++;
 
@@ -87,6 +96,15 @@ contract TokenMaster is ERC721 {
 
     function getSeatsTaken(uint256 _id) public view returns (uint256[] memory) {
         return seatsTaken[_id];
+    }
+
+    function getUserOccasions() public view returns (uint256[] memory) {
+        return userOccasions[msg.sender];
+    }
+
+    // Function to get all seats taken by a specific user for a specific occasion
+    function getUserSeatsForOccasion(uint256 _id) public view returns (uint256[] memory) {
+        return userSeatsPerOccasion[_id][msg.sender];
     }
 
     function withdraw() public onlyOwner {

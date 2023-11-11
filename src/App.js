@@ -27,7 +27,11 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(provider);
 
+    // console.log("network.chainId:", network.chainId);
     const network = await provider.getNetwork();
+
+    console.log("config:", config);
+    console.log("network:", network);
     const tokenMaster = new ethers.Contract(
       config[network.chainId].TokenMaster.address,
       TokenMaster,
@@ -38,12 +42,15 @@ function App() {
     const totalOccasions = await tokenMaster.totalOccasions();
     const occasions = [];
 
+    // console.log(await tokenMaster.getUserOccasions());
+
     for (var i = 1; i <= totalOccasions; i++) {
       const occasion = await tokenMaster.getOccasion(i);
       occasions.push(occasion);
     }
 
     setOccasions(occasions);
+    console.log(occasions);
 
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
@@ -67,7 +74,6 @@ function App() {
           <strong>Kettik</strong>
         </h2>
       </header>
-
       <Sort />
 
       <div className="cards">
@@ -85,7 +91,6 @@ function App() {
           />
         ))}
       </div>
-
       {toggle && (
         <SeatChart
           occasion={occasion}
