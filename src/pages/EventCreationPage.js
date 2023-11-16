@@ -4,7 +4,7 @@ import CreateEventForm from "../components/CreateEventForm"; // Import your form
 import Sort from "../components/Sort";
 import Navigation from "../components/Navigation";
 
-const EventCreationPage = ({ tokenMasterContract, account, setAccount, provider }) => {
+const EventCreationPage = ({ tokenMaster, account, setAccount, provider }) => {
   return (
     <>
     <header>
@@ -17,7 +17,7 @@ const EventCreationPage = ({ tokenMasterContract, account, setAccount, provider 
 
     <div>
       <h2>Create an Event</h2>
-      <CreateEventForm tokenMasterContract={tokenMasterContract} provider={provider} />
+      <CreateEventForm tokenMaster={tokenMaster} provider={provider} />
     </div>
     </>
   );
