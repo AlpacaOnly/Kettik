@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
 
-const CreateEventForm = ({ tokenMasterContract }) => {
+const CreateEventForm = ({ tokenMasterContract, provider }) => {
   const [formData, setFormData] = useState({
     name: "",
     cost: "",
@@ -19,8 +19,11 @@ const CreateEventForm = ({ tokenMasterContract }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(parseInt(formData.tickets, 10))
+      const signer = provider.getSigner();
+      console.log(signer)
       const costInWei = ethers.utils.parseUnits(formData.cost, "ether");
-      const transaction = await tokenMasterContract.list(
+      const transaction = await tokenMasterContract.connect(signer).list(
         formData.name,
         costInWei,
         parseInt(formData.tickets, 10),

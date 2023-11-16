@@ -26,15 +26,11 @@ const Navigation = ({ account, setAccount }) => {
           <li>
             <Link to="/">Concerts</Link>
           </li>
+          {account == "0x47e4f95FB4623A5831ea20aeB4C11E7873b08bE2" ? 
           <li>
             <Link to="/create-event">Create Event</Link>
-          </li>
-          {/* <li>
-            <Link to="/">Arts & Theater</Link>
-          </li>
-          <li>
-            <Link to="/">More</Link>
-          </li> */}
+          </li> : <li></li>
+          }
         </ul>
       </div>
 
