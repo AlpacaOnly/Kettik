@@ -16,7 +16,6 @@ const MainPage = ({account, occasions, tokenMaster, provider, setAccount, toggle
           <strong>Kettik</strong>
         </h2>
       </header>
-      <Sort />
 
       <div className="cards">
         {occasions.map((occasion, index) => (

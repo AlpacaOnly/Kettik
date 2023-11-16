@@ -31,6 +31,12 @@ const Navigation = ({ account, setAccount }) => {
             <Link to="/create-event">Create Event</Link>
           </li> : <li></li>
           }
+
+          {account ? 
+          <li>
+            <Link to="/my-events">My Events</Link>
+          </li> : <li></li>
+          }
         </ul>
       </div>
 

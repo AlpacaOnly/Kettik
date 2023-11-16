@@ -78,10 +78,7 @@ contract TokenMaster is ERC721 {
         seatTaken[_id][_seat] = msg.sender; // <-- Assign seat
         seatsTaken[_id].push(_seat); // <-- Update seats currently taken
 
-        // Add the occasion ID to the user's list of occasions if they haven't already bought a ticket for it
-        if (!hasBought[_id][msg.sender]) {
-            userOccasions[msg.sender].push(_id);
-        }
+        userOccasions[msg.sender].push(_id);
 
         userSeatsPerOccasion[_id][msg.sender].push(_seat);
 

@@ -6,6 +6,7 @@ import TokenMaster from "./abis/TokenMaster.json";
 import config from "./config.json";
 import MainPage from "./pages/MainPage";
 import EventCreationPage from "./pages/EventCreationPage";
+import MyEvents from "./pages/MyEvents"
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -24,8 +25,6 @@ function App() {
     // console.log("network.chainId:", network.chainId);
     const network = await provider.getNetwork();
 
-    console.log("config:", config);
-    console.log("network:", network);
     const tokenMaster = new ethers.Contract(
       config[network.chainId].TokenMaster.address,
       TokenMaster,
@@ -36,15 +35,12 @@ function App() {
     const totalOccasions = await tokenMaster.totalOccasions();
     const occasions = [];
 
-    // console.log(await tokenMaster.getUserOccasions());
-
     for (var i = 1; i <= totalOccasions; i++) {
       const occasion = await tokenMaster.getOccasion(i);
       occasions.push(occasion);
     }
 
     setOccasions(occasions);
-    console.log(occasions);
 
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
@@ -65,6 +61,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage account={account} occasions={occasions} tokenMaster={tokenMaster} provider={provider} setAccount={setAccount} toggle={toggle} setToggle={setToggle} occasion={occasion} setOccasion={setOccasion} />} />
           <Route path="/create-event" element={<EventCreationPage tokenMaster={tokenMaster} account={account} setAccount={setAccount} provider={provider} />} />
+          <Route path="/my-events" element={<MyEvents account={account} tokenMaster={tokenMaster} provider={provider} totalOcassions={occasions} />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -13,7 +13,6 @@ const EventCreationPage = ({ tokenMaster, account, setAccount, provider }) => {
         <strong>Kettik</strong>
       </h2>
     </header>
-    <Sort />
 
     <div>
       <h2>Create an Event</h2>
