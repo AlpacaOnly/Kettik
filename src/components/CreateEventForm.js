@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
 
-const CreateEventForm = ({ tokenMasterContract, provider }) => {
+const CreateEventForm = ({ tokenMaster, provider }) => {
   const [formData, setFormData] = useState({
     name: "",
     cost: "",
@@ -23,7 +23,7 @@ const CreateEventForm = ({ tokenMasterContract, provider }) => {
       const signer = provider.getSigner();
       console.log(signer)
       const costInWei = ethers.utils.parseUnits(formData.cost, "ether");
-      const transaction = await tokenMasterContract.connect(signer).list(
+      const transaction = await tokenMaster.connect(signer).list(
         formData.name,
         costInWei,
         parseInt(formData.tickets, 10),
