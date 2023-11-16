@@ -1,7 +1,7 @@
 # Kettik - DApp project for Blockchain Technologies course by  Mr. Abzal K.
 # Students:
 #           Ayazhan Aitzhanova
-#           Narbek Khozhakhmetov
+#           Narbek Kozhakhmetov
 #           Dias Nespayev
 #           Erasyl Serikov
 
