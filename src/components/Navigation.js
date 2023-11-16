@@ -1,3 +1,5 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { ethers } from "ethers";
 
 const Navigation = ({ account, setAccount }) => {
@@ -22,17 +24,17 @@ const Navigation = ({ account, setAccount }) => {
 
         <ul className="nav__links">
           <li>
-            <a href="/">Concerts</a>
+            <Link to="/">Concerts</Link>
           </li>
           <li>
-            <a href="/">Sports</a>
+            <Link to="/create-event">Create Event</Link>
+          </li>
+          {/* <li>
+            <Link to="/">Arts & Theater</Link>
           </li>
           <li>
-            <a href="/">Arts & Theater</a>
-          </li>
-          <li>
-            <a href="/">More</a>
-          </li>
+            <Link to="/">More</Link>
+          </li> */}
         </ul>
       </div>
 
